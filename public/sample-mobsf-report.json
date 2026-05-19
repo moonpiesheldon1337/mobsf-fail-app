@@ -1,0 +1,174 @@
+{
+  "version": "v4.0.1",
+  "title": "sample-app.apk",
+  "file_name": "sample-app.apk",
+  "app_name": "Sample App",
+  "app_type": "kotlin",
+  "package_name": "com.example.sampleapp",
+  "version_name": "1.2.3",
+  "version_code": "123",
+  "min_sdk": "24",
+  "target_sdk": "34",
+
+  "permissions": {
+    "android.permission.INTERNET": {
+      "status": "normal",
+      "info": "full Internet access",
+      "description": "Allows an application to create network sockets."
+    },
+    "android.permission.READ_SMS": {
+      "status": "dangerous",
+      "info": "read SMS messages",
+      "description": "Allows the app to read SMS messages stored on your device or SIM card."
+    },
+    "android.permission.ACCESS_FINE_LOCATION": {
+      "status": "dangerous",
+      "info": "precise location",
+      "description": "Allows the app to get your precise location using the Global Positioning System (GPS)."
+    },
+    "android.permission.CAMERA": {
+      "status": "dangerous",
+      "info": "take pictures and videos",
+      "description": "Allows the app to take pictures and videos with the camera."
+    }
+  },
+
+  "manifest_analysis": {
+    "manifest_findings": [
+      {
+        "rule": "app_allowbackup",
+        "title": "Application Data can be Backed up",
+        "severity": "warning",
+        "description": "The flag [android:allowBackup] should be set to false. By default it is set to true and allows anyone to backup your application data via adb.",
+        "name": "android:allowBackup",
+        "component": "true"
+      },
+      {
+        "rule": "exported_intent_filter_exists",
+        "title": "Activity (com.example.sampleapp.MainActivity) is not Protected. An intent-filter exists.",
+        "severity": "info",
+        "description": "An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the Activity is explicitly exported.",
+        "name": "MainActivity",
+        "component": "com.example.sampleapp.MainActivity"
+      },
+      {
+        "rule": "exported_protected_signature",
+        "title": "Activity (com.example.sampleapp.DeepLinkActivity) contains an intent-filter and is exported.",
+        "severity": "warning",
+        "description": "An Activity is exported and may handle deep links from untrusted sources.",
+        "name": "DeepLinkActivity",
+        "component": "com.example.sampleapp.DeepLinkActivity"
+      },
+      {
+        "rule": "broadcast_receiver_protected_normal",
+        "title": "Broadcast Receiver (com.example.sampleapp.BootReceiver) is Protected by a permission.",
+        "severity": "info",
+        "description": "A Broadcast Receiver listening for BOOT_COMPLETED is exported but protected by a system permission.",
+        "name": "BootReceiver",
+        "component": "com.example.sampleapp.BootReceiver"
+      }
+    ]
+  },
+
+  "network_security": {
+    "network_findings": [
+      {
+        "scope": ["staging.example.com"],
+        "description": "Base config is configured to permit cleartext traffic to staging.example.com.",
+        "severity": "warning"
+      },
+      {
+        "scope": ["10.0.2.2", "localhost"],
+        "description": "Debug overrides permits cleartext traffic to development/emulator endpoints.",
+        "severity": "info"
+      }
+    ]
+  },
+
+  "code_analysis": {
+    "findings": {
+      "android_kotlin_logging": {
+        "files": {
+          "com/example/sampleapp/ui/MainViewModel.kt": "47,82,103"
+        },
+        "metadata": {
+          "id": "android_kotlin_logging",
+          "description": "The App logs information. Sensitive information should never be logged.",
+          "severity": "info",
+          "cvss": 7.5,
+          "cwe": "CWE-532: Insertion of Sensitive Information into Log File",
+          "owasp-mobile": "M1: Improper Platform Usage",
+          "masvs": "storage-3"
+        }
+      },
+      "android_md5": {
+        "files": {
+          "com/example/sampleapp/util/CacheKey.kt": "12"
+        },
+        "metadata": {
+          "id": "android_md5",
+          "description": "MD5 is a weak hash known to have hash collisions.",
+          "severity": "warning",
+          "cvss": 7.4,
+          "cwe": "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+          "owasp-mobile": "M5: Insufficient Cryptography",
+          "masvs": "crypto-4"
+        }
+      },
+      "android_webview_javascript_interface": {
+        "files": {
+          "com/example/sampleapp/help/HelpWebView.kt": "33"
+        },
+        "metadata": {
+          "id": "android_webview_javascript_interface",
+          "description": "Remote WebView debugging is enabled / JavascriptInterface exposed.",
+          "severity": "warning",
+          "cvss": 8.8,
+          "cwe": "CWE-749: Exposed Dangerous Method or Function",
+          "owasp-mobile": "M1: Improper Platform Usage",
+          "masvs": "platform-7"
+        }
+      },
+      "android_sql_raw_query": {
+        "files": {
+          "com/example/sampleapp/data/UserDao.kt": "58"
+        },
+        "metadata": {
+          "id": "android_sql_raw_query",
+          "description": "App uses SQLite database and execute raw SQL query. Untrusted user input may lead to SQL Injection.",
+          "severity": "high",
+          "cvss": 8.8,
+          "cwe": "CWE-89: SQL Injection",
+          "owasp-mobile": "M7: Client Code Quality",
+          "masvs": "platform-2"
+        }
+      }
+    }
+  },
+
+  "secrets": [
+    "\"pk_live_51ABCdefGHIjklMNO0123456789pqrstuvWXYZ_aBcDeFgHiJkLmNoPqRsTuV\"",
+    "\"AIzaSyDXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"",
+    "AKIAIOSFODNN7EXAMPLE",
+    "\"a3f5b1e7c9d2f4a6b8c0d1e2f3a4b5c6\"",
+    "\"6Le-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\""
+  ],
+
+  "trackers": {
+    "detected_trackers": 1,
+    "trackers": [
+      {
+        "name": "Google Firebase Analytics",
+        "categories": "Analytics",
+        "url": "https://reports.exodus-privacy.eu.org/trackers/49"
+      }
+    ]
+  },
+
+  "binary_analysis": [],
+  "certificate_analysis": {
+    "certificate_findings": [
+      ["info", "Application signed with debuggable v1+v2 signing scheme", "The app is signed using v1 and v2 signing schemes."]
+    ]
+  }
+}
