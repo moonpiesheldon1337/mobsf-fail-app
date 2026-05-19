@@ -4,13 +4,20 @@
 
 A static web app that takes a [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) Community Edition report — in **JSON, PDF, or HTML** — runs each finding through a local LLM (via [WebLLM](https://github.com/mlc-ai/web-llm) and your GPU), and tells you how likely each one is to be a false positive — with reasoning. Export a clean Markdown report you can hand to a client.
 
-The whole thing runs in your browser. Your APK's findings never touch a server.
+The whole thing runs in your browser. Your APK's findings never touch a server. After the app loads, the only remote request is the one-time WebLLM model download; report parsing and triage run locally.
 
 **👉 Try it:** [moonpiesheldon1337.github.io/mobsf-fail-app](https://moonpiesheldon1337.github.io/mobsf-fail-app/)
 
-![demo](docs/demo.gif)
+Have 30 seconds? Open the live demo and drop `public/sample-mobsf-report.json` to test the flow end-to-end without a real engagement.
 
 ---
+
+## Who this is for
+
+- Mobile pentesters turning noisy MobSF exports into client-ready findings.
+- AppSec teams that need a local-first triage step before report writing or ticket creation.
+- Solo developers and security students who want to understand which MobSF findings need human attention.
+- DevSecOps teams experimenting with MobSF in CI/CD and needing reviewable Markdown or CSV output.
 
 ## Why this exists
 
